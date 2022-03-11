@@ -23,3 +23,5 @@ app.post('/login', Validations.validadeEmailSyntax, Validations.validadePassword
 controllers.login);
 
 app.get('/user', auth, controllers.getUsers);
+
+app.get('/user/:id', auth, controllers.getUsersById);

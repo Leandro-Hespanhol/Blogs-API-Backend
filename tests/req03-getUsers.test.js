@@ -81,7 +81,6 @@ describe('3 - Sua aplicação deve ter o endpoint GET `/user`', () => {
       .expect('status', 401)
       .then((responseSales) => {
         const { json } = responseSales;
-        console.log('responseSales', responseSales)
         expect(json.message).toBe('Expired or invalid token');
       });
   });

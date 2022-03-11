@@ -15,13 +15,17 @@ const create = async (user) => {
   return Users.create(user);
 };
 
-const listUsers = async () => {
-  console.log('CHEGOU NA LISTUSERS');
-  return Users.findAll();
+const findUserById = async (id) => {
+  const user = await Users.findOne({ where: { id } });
+
+  return user;
 };
+
+const listUsers = async () => Users.findAll();
 
 module.exports = {
   userFound,
   create,
   listUsers,
+  findUserById,
 };
