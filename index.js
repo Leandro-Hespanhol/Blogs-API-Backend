@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const Validations = require('./middlewares/Validations');
 const controllers = require('./controllers');
-// const auth = require('./services/jwtAuth');
+const auth = require('./services/jwtAuth');
 
 const app = express();
 
@@ -21,3 +21,5 @@ Validations.validadePassword, controllers.createUser);
 
 app.post('/login', Validations.validadeEmailSyntax, Validations.validadePassword,
 controllers.login);
+
+app.get('/user', auth, controllers.getUsers);
