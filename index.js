@@ -26,3 +26,5 @@ app.get('/user', auth, controllers.getUsers);
 app.get('/user/:id', auth, controllers.getUsersById);
 
 app.post('/categories', auth, Validations.categoryName, controllers.createCategory);
+
+app.get('/categories', auth, controllers.getCategories);
