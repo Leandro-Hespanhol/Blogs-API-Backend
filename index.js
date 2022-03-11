@@ -1,13 +1,12 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const Validations = require('./middlewares/Validations');
 const controllers = require('./controllers');
 const auth = require('./services/jwtAuth');
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.listen(3000, () => console.log('ouvindo porta 3000!'));
 
@@ -25,3 +24,5 @@ controllers.login);
 app.get('/user', auth, controllers.getUsers);
 
 app.get('/user/:id', auth, controllers.getUsersById);
+
+app.post('/categories', auth, Validations.categoryName, controllers.createCategory);

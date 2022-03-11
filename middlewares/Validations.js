@@ -43,8 +43,17 @@ const validadePassword = (req, res, next) => {
   next();
 };
 
+const categoryName = (req, res, next) => {
+  const { name } = req.body;
+  if (!name) {
+    return res.status(400).json({ message: '"name" is required' });
+  }
+  next();
+};
+
 module.exports = {
   validadeDisplayName,
   validadeEmailSyntax,
   validadePassword,
+  categoryName,
 };
