@@ -9,7 +9,6 @@ const Categories = sequelize.define('Categories', {
   });
 
   Categories.associate = (models) => {
-    // console.log('categories', models);
     Categories.hasMany(models.PostsCategories, { foreignKey: 'id', as: 'categoryId' });
   };
 

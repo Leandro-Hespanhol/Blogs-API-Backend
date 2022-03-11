@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const Validations = require('./middlewares/Validations');
-const controllers = require('./controllers/createUser');
+const controllers = require('./controllers');
 // const auth = require('./services/jwtAuth');
 
 const app = express();
@@ -17,4 +17,7 @@ app.get('/', (request, response) => {
 });
 
 app.post('/user', Validations.validadeDisplayName, Validations.validadeEmailSyntax,
-Validations.validadePassword, controllers.userCreation);
+Validations.validadePassword, controllers.createUser);
+
+app.post('/login', Validations.validadeEmailSyntax, Validations.validadePassword,
+controllers.login);

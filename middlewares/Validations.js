@@ -10,8 +10,12 @@ const validadeDisplayName = (req, res, next) => {
 const validadeEmailSyntax = (req, res, next) => {
   const { email } = req.body;
 
-  if (!email) {
+  if (!email && email !== '') {
     return res.status(400).json({ message: '"email" is required' });
+  }
+
+  if (email === '') {
+    return res.status(400).json({ message: '"email" is not allowed to be empty' });
   }
 
   const emailRegex = /\S+@\S+.\S\.+com/;
@@ -24,8 +28,12 @@ const validadeEmailSyntax = (req, res, next) => {
 
 const validadePassword = (req, res, next) => {
   const { password } = req.body;
-  if (!password) {
+  if (!password && password !== '') {
     return res.status(400).json({ message: '"password" is required' });
+  }
+
+  if (password === '') {
+    return res.status(400).json({ message: '"password" is not allowed to be empty' });
   }
 
   if (password.length !== 6) {
