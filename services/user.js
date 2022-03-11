@@ -1,9 +1,9 @@
-const Users = require('../models/Users');
+const { Users } = require('../models');
 
 const create = async (user) => {
-  const checkExistance = user.findOne();
-  console.log('linha5 services', user);
-  console.log('linha6 services', checkExistance);
+  // console.log('linha4 services', await user.email);
+  const checkExistance = await Users.findOne({ where: { email: user.email } });
+  // console.log('linha6 services', checkExistance.dataValues);
   if (checkExistance) return null;
   return Users.create(user);
 };

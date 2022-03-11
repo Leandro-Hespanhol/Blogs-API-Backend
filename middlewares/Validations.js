@@ -9,8 +9,13 @@ const validadeDisplayName = (req, res, next) => {
 
 const validadeEmailSyntax = (req, res, next) => {
   const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ message: '"email" is required' });
+  }
+
   const emailRegex = /\S+@\S+.\S\.+com/;
-  if (!email.test(emailRegex)) {
+  if (!emailRegex.test(email)) {
     return res.status(400)
       .json({ message: '"email" must be a valid email' });
   }

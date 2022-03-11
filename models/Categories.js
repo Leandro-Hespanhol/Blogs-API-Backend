@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-const categories = sequelize.define('Categories', {
+const Categories = sequelize.define('Categories', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allownull: false },
     name: DataTypes.STRING,
   }, {
@@ -8,9 +8,10 @@ const categories = sequelize.define('Categories', {
     underscored: false,
   });
 
-  categories.associate = (models) => {
-    categories.hasMany(models.PostCategory, { foreignKey: 'id', as: 'categoryId' });
+  Categories.associate = (models) => {
+    // console.log('categories', models);
+    Categories.hasMany(models.PostsCategories, { foreignKey: 'id', as: 'categoryId' });
   };
 
-  return categories;
+  return Categories;
 };
