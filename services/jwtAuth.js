@@ -13,6 +13,7 @@ module.exports = async (req, res, next) => {
   try {
     const decode = jwt.verify(token, secret);
     req.user = decode;
+    console.log('auth 16', req.user);
     next();
   } catch (e) {
     return res.status(401).json({ message: 'Expired or invalid token' });

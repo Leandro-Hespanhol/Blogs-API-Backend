@@ -28,3 +28,6 @@ app.get('/user/:id', auth, controllers.getUsersById);
 app.post('/categories', auth, Validations.categoryName, controllers.createCategory);
 
 app.get('/categories', auth, controllers.getCategories);
+
+app.post('/post', auth, Validations.blogPostTitle, Validations.blogPostContent, 
+Validations.blogCategoryId, controllers.createBlogPost);

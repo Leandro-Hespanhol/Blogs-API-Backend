@@ -7,7 +7,8 @@ const secret = process.env.JWT_SECRET;
 const userCreation = async (req, res) => {
   try {
     const { displayName, email, password, image } = req.body;
-    if (await userService.create({ displayName, email, password, image }) === null) {
+    const userCreated = await userService.create({ displayName, email, password, image });
+    if (await userCreated === null) {
       return res.status(409).json({ message: 'User already registered' });
     }
 
@@ -16,7 +17,8 @@ const userCreation = async (req, res) => {
       algorithm: 'HS256',
     };
 
-    const token = jwt.sign({ user: { displayName, email, password, image } }, secret, jwtConfig);
+    const token = jwt.sign({ userCreated }, secret, jwtConfig);
+    console.log(token);
 
     res.status(201).json({ token });
   } catch (e) {
