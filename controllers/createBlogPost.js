@@ -2,14 +2,13 @@ const services = require('../services/blogPosts');
 
 module.exports = async (req, res) => {
   const { title, categoryIds, content } = req.body;
-  console.log('CONTROLLER LINHA 5', req.user);
+  const { id: userId } = req.user;
 
-  if (!services.createBlogPost) {
+  const post = await services.createBlogPost({ userId, title, content, categoryIds });
+  
+  if (!post) {
     return res.status(400).json({ message: '"categoryIds" not found' });
   }
-
-  const post = await services.createBlogPost({ title, content, categoryIds });
-  console.log('POST CONTROLLER', post);
 
   return res.status(201).json(post);
 };
