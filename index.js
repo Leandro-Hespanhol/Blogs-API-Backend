@@ -40,3 +40,5 @@ app.put('/post/:id', auth, Validations.blogPostTitle, Validations.blogPostConten
  controllers.editBlogPost);
 
 app.delete('/post/:id', auth, controllers.deleteBlogPost);
+
+app.delete('/user/me', auth, controllers.userSelfDelete);

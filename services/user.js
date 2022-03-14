@@ -21,9 +21,23 @@ const findUserById = async (id) => {
 
 const listUsers = async () => Users.findAll();
 
+const deleteUser = async (id) => {
+  const checkUser = await Users.findOne({ where: { id } });
+  console.log('LINHA26', checkUser);
+  if (checkUser) {
+    const user = await checkUser.dataValues.id;
+    if (user !== id) return 'unauthorized';
+  }
+
+  const userToDelete = await Users.destroy({ where: { id } });
+
+  return userToDelete;
+};
+
 module.exports = {
   userFound,
   create,
   listUsers,
   findUserById,
+  deleteUser,
 };
