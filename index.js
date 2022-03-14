@@ -35,3 +35,6 @@ Validations.blogCategoryId, controllers.createBlogPost);
 app.get('/post', auth, controllers.getBlogPosts);
 
 app.get('/post/:id', auth, controllers.getBlogPostsById);
+
+app.put('/post/:id', auth, Validations.blogPostTitle, Validations.blogPostContent,
+ controllers.editBlogPost);

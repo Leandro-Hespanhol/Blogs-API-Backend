@@ -7,6 +7,7 @@ const getCategories = require('./getCategories');
 const createBlogPost = require('./createBlogPost');
 const getBlogPosts = require('./getBlogPosts');
 const getBlogPostsById = require('./getBlogPostsById');
+const editBlogPost = require('./editBlogPost');
 
 module.exports = {
   createUser: createUser.userCreation,
@@ -18,4 +19,5 @@ module.exports = {
   createBlogPost,
   getBlogPosts,
   getBlogPostsById,
+  editBlogPost,
 };
