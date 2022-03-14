@@ -12,13 +12,21 @@ const createBlogPost = async (newPost) => {
 const getAllBlogPosts = async () => {
   const allBlogPosts = await BlogPosts
     .findAll({ include: [{ model: Users, as: 'user' }, { model: Categories, as: 'categories' }] });
-  // const allBlogPosts = await BlogPosts.findAll();
-  // console.log('linha16 blogposts', allBlogPosts[0]);
   
   return allBlogPosts;
+};
+
+const getBlogPostById = async (id) => {
+  const blogPost = await BlogPosts.findAll({ 
+    where: { id }, 
+    include: [{ model: Users, as: 'user' }, { model: Categories, as: 'categories' }] });
+    // console.log('LINHA30', blogPost);
+
+    return blogPost;
 };
 
 module.exports = {
   createBlogPost,
   getAllBlogPosts,
+  getBlogPostById,
 };

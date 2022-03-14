@@ -33,3 +33,5 @@ app.post('/post', auth, Validations.blogPostTitle, Validations.blogPostContent,
 Validations.blogCategoryId, controllers.createBlogPost);
 
 app.get('/post', auth, controllers.getBlogPosts);
+
+app.get('/post/:id', auth, controllers.getBlogPostsById);
