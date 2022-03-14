@@ -28,15 +28,28 @@ const editBlogPost = async (id, title, content, userId) => {
   const blogPost = await BlogPosts
     .update({ title, content }, { where: { id }, userId: { userId } });
   
-  // console.log('id title content', id, title, content);
-  // console.log('SERVICE LINHA 30', blogPost);
   const updated = await BlogPosts.findAll({ 
     where: { id }, 
     include: [{ model: Users, as: 'user' }, { model: Categories, as: 'categories' }] });
-  // console.log('LINHA34 SERVICES', updated[0].dataValues.user.dataValues);
+
   if (updated[0].dataValues.user.dataValues.id !== userId) return ['unauthorized'];
   if (blogPost.length) return updated;
 
+  return blogPost;
+};
+
+const deleteBlogPost = async (id, userId) => {
+  const toDestroy = await BlogPosts.findOne({ 
+    where: { id } });
+
+  if (toDestroy) { 
+    const checkId = await toDestroy.dataValues.userId;
+    if (checkId !== userId) return 'unauthorized';
+  }
+  
+  const blogPost = await BlogPosts
+    .destroy({ where: { id, userId } });
+  
   return blogPost;
 };
 
@@ -45,4 +58,5 @@ module.exports = {
   getAllBlogPosts,
   getBlogPostById,
   editBlogPost,
+  deleteBlogPost,
 };
