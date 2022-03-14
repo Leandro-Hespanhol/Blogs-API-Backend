@@ -1,3 +1,6 @@
+const Sequelize = require('sequelize');
+
+const { Op } = Sequelize;
 const { BlogPosts, Categories, Users } = require('../models');
 
 const createBlogPost = async (newPost) => {
@@ -53,10 +56,35 @@ const deleteBlogPost = async (id, userId) => {
   return blogPost;
 };
 
+const findByTitleOrContent = async (term) => {
+  console.log('LINHA58', term);
+
+  const titleSearch = await BlogPosts.findAll({ 
+    where: { [Op.or]: [{ title: { [Op.like]: `%${term}%` } }, 
+    { content: { [Op.like]: `%${term}%` } }] }, 
+    // or: [{ content: { [Op.like]: `%${term}%` } }], 
+    include: [{ model: Users, as: 'user' }, { model: Categories, as: 'categories' }] });
+    // console.log(titleSearch[0].dataValues);
+  if (term) return titleSearch;
+
+  // const contentSearch = await BlogPosts.findAll({ 
+  //   where: { content: { [Op.like]: `%${term.content}%` } }, 
+  //   include: [{ model: Users, as: 'user' }, { model: Categories, as: 'categories' }] });
+  // const postFound = await BlogPosts.findAll({ where: { } });
+  
+  // if (term.content) return contentSearch;
+
+  const noFilterSearch = await BlogPosts.findAll({ 
+    include: [{ model: Users, as: 'user' }, { model: Categories, as: 'categories' }] });
+
+  return noFilterSearch;
+};
+
 module.exports = {
   createBlogPost,
   getAllBlogPosts,
   getBlogPostById,
   editBlogPost,
   deleteBlogPost,
+  findByTitleOrContent,
 };

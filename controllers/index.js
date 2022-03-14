@@ -10,6 +10,7 @@ const getBlogPostsById = require('./getBlogPostsById');
 const editBlogPost = require('./editBlogPost');
 const deleteBlogPost = require('./deleteBlogPost');
 const userSelfDelete = require('./userSelfDelete');
+const searchBlogPost = require('./searchBlogPost');
 
 module.exports = {
   createUser: createUser.userCreation,
@@ -24,4 +25,5 @@ module.exports = {
   editBlogPost,
   deleteBlogPost,
   userSelfDelete,
+  searchBlogPost,
 };

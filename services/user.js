@@ -23,7 +23,7 @@ const listUsers = async () => Users.findAll();
 
 const deleteUser = async (id) => {
   const checkUser = await Users.findOne({ where: { id } });
-  console.log('LINHA26', checkUser);
+  
   if (checkUser) {
     const user = await checkUser.dataValues.id;
     if (user !== id) return 'unauthorized';
