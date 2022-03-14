@@ -31,3 +31,5 @@ app.get('/categories', auth, controllers.getCategories);
 
 app.post('/post', auth, Validations.blogPostTitle, Validations.blogPostContent, 
 Validations.blogCategoryId, controllers.createBlogPost);
+
+app.get('/post', auth, controllers.getBlogPosts);
