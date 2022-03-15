@@ -8,7 +8,6 @@ const userFound = async (user) => {
 
 const create = async (user) => {
   const checkExistance = await Users.findOne({ where: { email: user.email } });
-  // console.log('linha6 services', checkExistance.dataValues);
   if (checkExistance) return null;
   return Users.create(user);
 };

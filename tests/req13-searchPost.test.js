@@ -10,7 +10,7 @@ describe('13 - Sua aplicação deve ter o endpoint GET `post/search?q=:searchTer
     shell.exec('npx sequelize-cli db:seed:all $');
   });
 
-  it.only('Será validado que é possível buscar um blogpost pelo `title`', async () => {
+  it('Será validado que é possível buscar um blogpost pelo `title`', async () => {
     let token;
     await frisby
       .post(`${url}/login`,
@@ -37,9 +37,9 @@ describe('13 - Sua aplicação deve ter o endpoint GET `post/search?q=:searchTer
       .get(`${url}/post/search?q=Vamos que vamos`)
       .expect('status', 200)
       .then((response) => {
+        console.log(response)
         const { body } = response;
         const result = JSON.parse(body);
-        console.log('42 TESTS', body)
         expect(result[0].id).toBe(2);
         expect(result[0].title).toBe('Vamos que vamos');
         expect(result[0].content).toBe('Foguete não tem ré');
