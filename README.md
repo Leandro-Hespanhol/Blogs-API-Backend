@@ -1,5 +1,7 @@
 ### API blog with Object Relational mapping (ORM) 
--REST
--MSC Arquitecture
--NODEJS
--Express
+-Sequelize <br> 
+-NODEJS <br>
+-Express <br>
+-Token validation with JsonWebToken <br>
+-REST <br>
+-MSC Arquitecture <br>
